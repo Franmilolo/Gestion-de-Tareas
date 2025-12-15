@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasky - Gestión de Tareas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <span>Tasky</span>
+            </div>
+            <div class="menu-item active">
+                <span>🏠</span>
+                <span>Panel</span>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="header">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Buscar tareas">
+                </div>
+                <div class="header-actions">
+                    <button class="btn-add" onclick="openModal()">+ Agregar tarea</button>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn-control" onclick="filterByPriority('all')">📋 Todas</button>
+                <button class="btn-control" onclick="filterByPriority('high')">🔴 Alta</button>
+                <button class="btn-control" onclick="filterByPriority('medium')">🟡 Media</button>
+                <button class="btn-control" onclick="filterByPriority('low')">🟢 Baja</button>
+                <button class="btn-control" onclick="sortByDate()">📅 Ordenar por fecha</button>
+            </div>
+
+            <div class="task-columns">
+                <div class="task-column">
+                    <div class="column-header">
+                        <span class="column-title">En progreso</span>
+                        <span class="task-count" id="inProgressCount">0</span>
+                    </div>
+                    <div id="inProgressColumn"></div>
+                </div>
+
+                <div class="task-column">
+                    <div class="column-header">
+                        <span class="column-title">Tareas completadas</span>
+                        <span class="task-count" id="completedCount">0</span>
+                    </div>
+                    <div id="completedColumn"></div>
+                </div>
+
+                <div class="task-column">
+                    <div class="column-header">
+                        <span class="column-title">Atrasadas</span>
+                        <span class="task-count" id="overDueCount">0</span>
+                    </div>
+                    <div id="overDueColumn"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Agregar nueva tarea</h2>
+                <button class="btn-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label>Título *</label>
+                    <input type="text" id="taskTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Descripción *</label>
+                    <textarea id="taskDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Materia / Área *</label>
+                    <input type="text" id="taskSubject" placeholder="Ej.: Diseño UX, Desarrollo">
+                </div>
+                <div class="form-group">
+                    <label>Fecha límite *</label>
+                    <input type="date" id="taskDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Prioridad *</label>
+                    <select id="taskPriority" required>
+                        <option value="low">Baja</option>
+                        <option value="medium">Media</option>
+                        <option value="high">Alta</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Estado *</label>
+                    <select id="taskStatus" required>
+                        <option value="in-progress">En progreso</option>
+                        <option value="completed">Completada</option>
+                        <option value="over-due">Atrasada</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar tarea</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
